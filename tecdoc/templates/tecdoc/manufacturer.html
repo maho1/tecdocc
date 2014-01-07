@@ -1,0 +1,17 @@
+{% extends 'tecdoc/base.html'%}
+
+{% load url from future %}
+
+{% block content %}
+<h1>Производитель {{object}}</h1>
+<p>Всего моделей: {{object.carmodel_set.count}}</p>
+
+{% load pagination_tags %}
+{% autopaginate object.carmodel_set.all %}
+<ul>
+{% for model in page_obj %}
+  <li><a href="{% url 'tecdoc-models' model.id %}">{{model}}</a></li>
+{% endfor %}
+</ul>
+{% paginate %}
+{% endblock %}
